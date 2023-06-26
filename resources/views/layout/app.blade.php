@@ -13,6 +13,12 @@
 
 
     @yield('content')
+
+    <script>
+        @yield('scripts-custom')
+        console.log('ciaooo');
+    </script>
+    
     
 </body>
 </html>
