@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use App\Models\Comic;
+
 class ComicSeeder extends Seeder
 {
     /**
@@ -14,6 +16,25 @@ class ComicSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
+        $arrayComics = config( 'comics' );
+
+        foreach( $arrayComics as $elem ){
+
+            $newComic = new Comic();
+
+            $newComic->title = $elem['title'];
+            $newComic->description = $elem['description'];
+            $newComic->thumb = $elem['thumb'];
+            $newComic->price = $elem['price'];
+            $newComic->series = $elem['series'];
+            $newComic->sale_date = $elem['sale_date'];
+            $newComic->type = $elem['type'];
+
+
+            $newComic->save();
+
+        }
+
     }
 }
