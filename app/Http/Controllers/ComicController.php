@@ -40,6 +40,19 @@ class ComicController extends Controller
     public function store(Request $request)
     {
         
+        $request->validate(
+            [
+                'title'=> 'required|max:200',
+                'price'=> 'required'
+            ],
+            [
+                'title.required'=> 'Il campo :attribute :input è richiesto',
+                'title.max' => 'Il campo Title non deve superare i 200 caratteri',
+                'title.unique' => 'Il titolo scelto deve essere unico',
+                'price.required' => 'Il prezzo è obbligatorio'
+            ],
+        );
+
         $form_data = $request->all();
 
         $newComic = new Comic();
@@ -84,6 +97,21 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
+
+        $request->validate(
+            [
+                'title'=> 'required|max:200',
+                'price'=> 'required'
+            ],
+            [
+                'title.required'=> 'Il campo :attribute :input è richiesto',
+                'title.max' => 'Il campo Title non deve superare i 200 caratteri',
+                'title.unique' => 'Il titolo scelto deve essere unico',
+                'price.required' => 'Il prezzo è obbligatorio'
+            ],
+        );
+
+
         $form_data = $request->all();
         $comic->update( $form_data );
 

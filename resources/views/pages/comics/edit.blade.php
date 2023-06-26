@@ -12,6 +12,21 @@ laravel dc comics | Comics Edit
         Modifica il fumetto
     </h1>
 
+    @if ($errors->any())
+
+        <div class="alert alert-danger">
+
+            <ul>
+                @foreach($errors->all() as $error) 
+                    <li>
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+    @endif
+
     {{-- Form --}}
 
     <form action="{{ route( 'comics.update', $comic ) }}" method="POST">
@@ -20,7 +35,12 @@ laravel dc comics | Comics Edit
 
         <div class="form-group">
             <label class="form-label" for="">Title</label>
-            <input class="form-control" type="text" name="title" value="{{ old('title') ?? $comic->title }}">
+            <input class="form-control  @error('title') is-invalid @enderror" type="text" name="title" value="{{ old('title') ?? $comic->title }}">
+            @error('title')
+                <div class="alert alert-danger">
+                    {{$message}}
+                </div>
+            @enderror
         </div>
 
         <div class="form-group">

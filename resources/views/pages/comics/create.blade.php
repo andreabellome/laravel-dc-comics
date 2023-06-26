@@ -13,7 +13,20 @@ laravel dc comics | Comics Create
         Crea il fumetto
     </h1>
 
-    {{-- Form --}}
+    @if ($errors->any())
+
+        <div class="alert alert-danger">
+
+            <ul>
+                @foreach($errors->all() as $error) 
+                    <li>
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+    @endif
 
     <form action="{{ route( 'comics.store' ) }}" method="POST">
         @csrf
@@ -21,7 +34,12 @@ laravel dc comics | Comics Create
 
         <div class="form-group">
             <label class="form-label" for="">Title</label>
-            <input class="form-control" type="text" name="title">
+            <input class="form-control  @error('title') is-invalid @enderror" type="text" name="title">
+            @error('title')
+                <div class="alert alert-danger">
+                    {{$message}}
+                </div>
+            @enderror
         </div>
 
         <div class="form-group">
