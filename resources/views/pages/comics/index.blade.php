@@ -25,7 +25,7 @@
             @csrf
             @method('DELETE')
 
-            <button type="submit" class="btn btn-danger">Destroy</button>    
+            <button onclick="return cancellaElem()" type="submit" class="btn btn-danger">Destroy</button>    
         </form>
         
     @empty
@@ -37,5 +37,9 @@
 @endsection
 
 @section('scripts-custom')
+
+    function cancellaElem(){
+        return confirm('Sei sicuro di voler cancellare il fumetto?');
+    }
 
 @endsection
